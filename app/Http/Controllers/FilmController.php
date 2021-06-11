@@ -19,8 +19,8 @@ class FilmController extends Controller
     //  Affiche la liste des films
     public function index()
     {
-        // pagination
-        $films = Film::paginate(5);
+        // pagination et tri ordre alphabétique
+        $films = Film::withTrashed()->oldest('title')->paginate(5);
 
         // On va chercher tous les films et appeler la vue index
         return view('index',compact('films'));
@@ -104,12 +104,27 @@ class FilmController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //  supprimer un film
+    //  mettre un film dans la corbeille
     public function destroy(Film $film)
     {
         $film->delete();
 
         // Message de confirmation
-        return back()->with('info', 'Le film a bien été supprimé dans la base de données.');
+        return back()->with('info', 'Le film a bien été mis dans la corbeille.');
     }
+
+    // Supprimer un film de la corbeille
+    public function forceDestroy($id)
+    {
+        Film::withTrashed()->whereId($id)->firstOrFail()->forceDelete();
+        return back()->with('info', 'Le film a bien été supprimé définitivement dans la base de données.');
+    }
+
+    // Restaurer un film de la corbeille
+    public function restore($id)
+    {
+        Film::withTrashed()->whereId($id)->firstOrFail()->restore();
+        return back()->with('info', 'Le film a bien été restauré.');
+    }
+
 }

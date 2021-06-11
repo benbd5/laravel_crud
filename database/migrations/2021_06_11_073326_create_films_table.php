@@ -18,6 +18,7 @@ class CreateFilmsTable extends Migration
             $table->string('title');
             $table->year('year');
             $table->text('description');
+            $table->softDeletes(); // créé une corbeille pour éviter la suppression définitive du premier coup
             $table->timestamps();
         });
     }

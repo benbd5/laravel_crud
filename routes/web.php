@@ -21,3 +21,7 @@ Route::get('/', function () {
 
 // Création de toutes les routes du CRUD avec Route::ressource
 Route::resource('films', FilmController::class);
+
+// Soft Delete (corbeille)
+Route::delete('films/force/{film}', [FilmController::class, 'forceDestroy'])->name('films.force.destroy');
+Route::put('films/restore/{film}', [FilmController::class, 'restore'])->name('films.restore');
