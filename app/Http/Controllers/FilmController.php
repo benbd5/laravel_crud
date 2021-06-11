@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Film;
+
 class FilmController extends Controller
 {
     /**
@@ -15,7 +17,9 @@ class FilmController extends Controller
     //  Affiche la liste des films
     public function index()
     {
-        //
+        // On va chercher tous les films et appeler la vue index
+        $films=Film::all();
+        return view('index',compact('films'));
     }
 
     /**
