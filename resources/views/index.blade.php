@@ -1,5 +1,15 @@
 @extends('template')
 
+@section('css')
+    <style>
+        .card-footer {
+            justify-content: center;
+            align-items: center;
+            padding: 0.4em;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="card">
         <header class="card-header">
@@ -39,4 +49,8 @@
             </div>
         </div>
     </div>
+    <footer class="card-footer">
+        {{ $films->links() }}
+    </footer>
+</div>
 @endsection

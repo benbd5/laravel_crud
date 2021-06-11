@@ -17,9 +17,12 @@ class FilmController extends Controller
     //  Affiche la liste des films
     public function index()
     {
+        // pagination
+        $films = Film::paginate(5);
+
         // On va chercher tous les films et appeler la vue index
-        $films=Film::all();
         return view('index',compact('films'));
+
     }
 
     /**
