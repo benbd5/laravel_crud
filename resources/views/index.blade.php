@@ -11,6 +11,14 @@
 @endsection
 
 @section('content')
+
+    {{-- Message de suppression/Modification --}}
+    @if(session()->has('info'))
+        <div class="notification is-success">
+            {{ session('info') }}
+        </div>
+    @endif
+
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">Films</p>

@@ -99,8 +99,11 @@ class FilmController extends Controller
      */
 
     //  supprimer un film
-    public function destroy($id)
+    public function destroy(Film $film)
     {
-        //
+        $film->delete();
+
+        // Message de confirmation
+        return back()->with('info', 'Le film a bien été supprimé dans la base de données.');
     }
 }
