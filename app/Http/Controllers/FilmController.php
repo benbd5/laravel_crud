@@ -11,6 +11,8 @@ class FilmController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  Affiche la liste des films
     public function index()
     {
         //
@@ -21,6 +23,8 @@ class FilmController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Afficher le formulaire pour la création d’un nouveau film
     public function create()
     {
         //
@@ -32,6 +36,8 @@ class FilmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //  créer un nouveau film
     public function store(Request $request)
     {
         //
@@ -43,6 +49,8 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  afficher les données d’un film
     public function show($id)
     {
         //
@@ -54,6 +62,8 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  Afficher le formulaire pour la modification d’un film
     public function edit($id)
     {
         //
@@ -66,6 +76,8 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  modifier les données d’un film
     public function update(Request $request, $id)
     {
         //
@@ -77,6 +89,8 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  supprimer un film
     public function destroy($id)
     {
         //
