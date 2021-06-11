@@ -76,9 +76,9 @@ class FilmController extends Controller
      */
 
     //  Afficher le formulaire pour la modification d’un film
-    public function edit($id)
+    public function edit(Film $film)
     {
-        //
+        return view('edit', compact('film'));
     }
 
     /**
@@ -90,9 +90,11 @@ class FilmController extends Controller
      */
 
     //  modifier les données d’un film
-    public function update(Request $request, $id)
+    public function update(FilmRequest $filmRequest, Film $film)
     {
-        //
+        $film->update($filmRequest->all());
+
+        return redirect()->route('films.index')->with('info','Le film a bien été modifié');
     }
 
     /**
