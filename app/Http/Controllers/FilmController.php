@@ -58,9 +58,10 @@ class FilmController extends Controller
      */
 
     //  afficher les données d’un film
-    public function show($id)
+    public function show(Film $film)
     {
         //
+        return view('show', compact('film'));
     }
 
     /**
