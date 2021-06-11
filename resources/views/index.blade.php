@@ -7,21 +7,24 @@
             align-items: center;
             padding: 0.4em;
         }
+        .is-info {
+            margin: 0.3em;
+        }
     </style>
 @endsection
 
 @section('content')
 
-    {{-- Message de suppression/Modification --}}
+    {{-- Message de création/modification/suppression --}}
     @if(session()->has('info'))
         <div class="notification is-success">
             {{ session('info') }}
         </div>
     @endif
-
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">Films</p>
+            <a class="button is-info" href="{{ route('films.create') }}">Créer un film</a>
         </header>
         <div class="card-content">
             <div class="content">
@@ -45,7 +48,6 @@
                                 <td>
                                     <form action="{{ route('films.destroy', $film->id) }}" method="post">
                                         @csrf
-                                        {{-- méthode DELETE car formulaires ne supportent pas les verbes PUT,PATCH,DELETE --}}
                                         @method('DELETE')
                                         <button class="button is-danger" type="submit">Supprimer</button>
                                     </form>
@@ -56,9 +58,10 @@
                 </table>
             </div>
         </div>
+
+        {{-- Pagination --}}
+        <footer class="card-footer is-centered">
+            {{ $films->links() }}
+        </footer>
     </div>
-    <footer class="card-footer">
-        {{ $films->links() }}
-    </footer>
-</div>
 @endsection

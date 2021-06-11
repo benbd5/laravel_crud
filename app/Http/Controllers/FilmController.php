@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Film;
 
+use App\Http\Requests\Film as FilmRequest;
+
 class FilmController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class FilmController extends Controller
     // Afficher le formulaire pour la création d’un nouveau film
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -45,9 +47,11 @@ class FilmController extends Controller
      */
 
     //  créer un nouveau film
-    public function store(Request $request)
+    public function store(Request $filmRequest)
     {
-        //
+        Film::create($filmRequest->all());
+
+        return redirect()->route('films.index')->with('info','Le film a bien été créé');
     }
 
     /**
