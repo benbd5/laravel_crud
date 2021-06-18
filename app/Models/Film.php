@@ -12,4 +12,9 @@ class Film extends Model
 
     // Assignement
     protected $fillable = ['title', 'year', 'description'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
