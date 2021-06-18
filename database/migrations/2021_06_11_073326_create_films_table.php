@@ -13,6 +13,7 @@ class CreateFilmsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('films', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -20,6 +21,12 @@ class CreateFilmsTable extends Migration
             $table->text('description');
             $table->softDeletes(); // créé une corbeille pour éviter la suppression définitive du premier coup
             $table->timestamps();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')
+                  ->references('id')
+                  ->on('categories')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
         });
     }
 
