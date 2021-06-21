@@ -27,8 +27,7 @@ class FilmController extends Controller
         $films = $query->withTrashed()->oldest('title')->paginate(5);
 
         // On va chercher tous les films et appeler la vue index
-        $categories = Category::all();
-        return view('index', compact('films', 'categories', 'slug'));
+        return view('index', compact('films', 'slug'));
     }
 
     /**
@@ -40,8 +39,7 @@ class FilmController extends Controller
     // Afficher le formulaire pour la création d’un nouveau film
     public function create()
     {
-        $categories = Category::all(); // On recupere toutes les categories
-        return view('create', compact('categories'));
+        return view('create');
     }
 
     /**
