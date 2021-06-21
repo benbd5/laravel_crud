@@ -25,3 +25,6 @@ Route::resource('films', FilmController::class);
 // Soft Delete (corbeille)
 Route::delete('films/force/{film}', [FilmController::class, 'forceDestroy'])->name('films.force.destroy');
 Route::put('films/restore/{film}', [FilmController::class, 'restore'])->name('films.restore');
+
+// Aller chercher les films par catégorie
+Route::get('category/{slug}/films', [FilmController::class, 'index'])->name('films.category');

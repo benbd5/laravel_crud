@@ -13,6 +13,7 @@ class Film extends Model
     // Assignement
     protected $fillable = ['title', 'year', 'description'];
 
+    // Permet de trouver la catégorie à laquelle appartient (belongsTo) le film
     public function category()
     {
         return $this->belongsTo(Category::class);

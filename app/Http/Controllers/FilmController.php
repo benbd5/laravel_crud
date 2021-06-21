@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Film;
+use App\Models\{Film, Category};
 
 use App\Http\Requests\Film as FilmRequest;
 
@@ -17,13 +17,18 @@ class FilmController extends Controller
      */
 
     //  Affiche la liste des films
-    public function index()
+    public function index($slug = null)
     {
+
+        // Est-ce que le slug est fourni ?
+        $query = $slug ? Category::whereSlug($slug)->firstOrFail()->films() : Film::query();
+
         // pagination et tri ordre alphabétique
         $films = Film::withTrashed()->oldest('title')->paginate(5);
 
         // On va chercher tous les films et appeler la vue index
-        return view('index',compact('films'));
+        $categories = Category::all();
+        return view('index', compact('films', 'categories', 'slug'));
 
     }
 
@@ -64,8 +69,10 @@ class FilmController extends Controller
     //  afficher les données d’un film
     public function show(Film $film)
     {
-        //
-        return view('show', compact('film'));
+        // Ajout du nom de la catégorie du film
+        $category = $film->category->name;
+
+        return view('show', compact('film', 'category'));
     }
 
     /**

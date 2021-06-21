@@ -9,6 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
+    // Une catégorie a plusieurs (hasMany) films (Film)
     public function films()
     {
         return $this->hasMany(Film::class);
