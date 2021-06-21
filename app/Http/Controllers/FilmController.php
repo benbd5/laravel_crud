@@ -23,13 +23,12 @@ class FilmController extends Controller
         // Est-ce que le slug est fourni ?
         $query = $slug ? Category::whereSlug($slug)->firstOrFail()->films() : Film::query();
 
-        // pagination et tri ordre alphabétique
-        $films = Film::withTrashed()->oldest('title')->paginate(5);
+        // pagination et tri ordre alphabétique en fonction du slug passe dans l'url
+        $films = $query->withTrashed()->oldest('title')->paginate(5);
 
         // On va chercher tous les films et appeler la vue index
         $categories = Category::all();
         return view('index', compact('films', 'categories', 'slug'));
-
     }
 
     /**
@@ -41,7 +40,8 @@ class FilmController extends Controller
     // Afficher le formulaire pour la création d’un nouveau film
     public function create()
     {
-        return view('create');
+        $categories = Category::all(); // On recupere toutes les categories
+        return view('create', compact('categories'));
     }
 
     /**
@@ -56,7 +56,7 @@ class FilmController extends Controller
     {
         Film::create($filmRequest->all());
 
-        return redirect()->route('films.index')->with('info','Le film a bien été créé');
+        return redirect()->route('films.index')->with('info', 'Le film a bien été créé');
     }
 
     /**
@@ -101,7 +101,7 @@ class FilmController extends Controller
     {
         $film->update($filmRequest->all());
 
-        return redirect()->route('films.index')->with('info','Le film a bien été modifié');
+        return redirect()->route('films.index')->with('info', 'Le film a bien été modifié');
     }
 
     /**
@@ -133,5 +133,4 @@ class FilmController extends Controller
         Film::withTrashed()->whereId($id)->firstOrFail()->restore();
         return back()->with('info', 'Le film a bien été restauré.');
     }
-
 }

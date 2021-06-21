@@ -11,7 +11,7 @@ class Film extends Model
     use HasFactory, SoftDeletes;
 
     // Assignement
-    protected $fillable = ['title', 'year', 'description'];
+    protected $fillable = ['title', 'year', 'description', 'category_id'];
 
     // Permet de trouver la catégorie à laquelle appartient (belongsTo) le film
     public function category()
